@@ -1,12 +1,12 @@
 package com.users_api.service;
 
-import com.users_api.entity.User;
+import com.users_api.dto.UserDto;
 
 import java.util.List;
 
 public interface ExternalApiService {
 
-    public List<User> getUsersFromExternalApi();
+    public List<UserDto> getUsersFromExternalApi();
 
-    public User getUserByIdFromExternalApi(Long id);
+    public UserDto getUserByIdFromExternalApi(Long id);
 }

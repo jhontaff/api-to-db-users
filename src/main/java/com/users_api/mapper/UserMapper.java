@@ -6,14 +6,35 @@ import com.users_api.entity.User;
 
 public class UserMapper {
 
-    private final AddressDto addressDto;
-
-    private UserMapper(AddressDto addressDto) {
-        this.addressDto = addressDto;
+    public UserDto mapToDto(User user) {
+        if (user == null) {
+            return null;
+        }
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
+        userDto.setAddress(new AddressMapper().mapToDto(user.getAddress()));
+        userDto.setPhone(user.getPhone());
+        userDto.setWebsite(user.getWebsite());
+        userDto.setCompany(new CompanyMapper().mapToDto(user.getCompany()));
+        return userDto;
     }
 
-    public UserDto mapToDto(User user) {
-        return new UserDto(user.getId(), user.getName(), user.getUsername(), user.getEmail(),
-                addressDto.mapToEntity(user.getAddress()), user.getPhone(), user.getWebsite(), user.getCompany());
+    public User mapToEntity(UserDto userDto) {
+        if (userDto == null) {
+            return null;
+        }
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setName(userDto.getName());
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setAddress(new AddressMapper().mapToEntity(userDto.getAddress()));
+        user.setPhone(userDto.getPhone());
+        user.setWebsite(userDto.getWebsite());
+        user.setCompany(new CompanyMapper().mapToEntity(userDto.getCompany()));
+        return user;
     }
 }

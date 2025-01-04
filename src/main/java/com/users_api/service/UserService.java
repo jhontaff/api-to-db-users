@@ -12,5 +12,5 @@ public interface UserService {
 
     public User createUser(User user);
 
-    public void createUsers(List<User> users);
+    public void createUsers();
 }
