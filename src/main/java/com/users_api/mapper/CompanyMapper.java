@@ -2,8 +2,9 @@ package com.users_api.mapper;
 
 import com.users_api.dto.CompanyDto;
 import com.users_api.entity.Company;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class CompanyMapper {
 
     public CompanyDto mapToDto(Company company){

@@ -1,10 +1,19 @@
 package com.users_api.mapper;
 
-import com.users_api.dto.AddressDto;
 import com.users_api.dto.UserDto;
 import com.users_api.entity.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
+
+    private final AddressMapper addressMapper;
+    private final CompanyMapper companyMapper;
+
+    public UserMapper(AddressMapper addressMapper, CompanyMapper companyMapper) {
+        this.addressMapper = addressMapper;
+        this.companyMapper = companyMapper;
+    }
 
     public UserDto mapToDto(User user) {
         if (user == null) {
@@ -15,10 +24,10 @@ public class UserMapper {
         userDto.setName(user.getName());
         userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
-        userDto.setAddress(new AddressMapper().mapToDto(user.getAddress()));
+        userDto.setAddress(addressMapper.mapToDto(user.getAddress()));
         userDto.setPhone(user.getPhone());
         userDto.setWebsite(user.getWebsite());
-        userDto.setCompany(new CompanyMapper().mapToDto(user.getCompany()));
+        userDto.setCompany(companyMapper.mapToDto(user.getCompany()));
         return userDto;
     }
 
@@ -27,14 +36,13 @@ public class UserMapper {
             return null;
         }
         User user = new User();
-        user.setId(userDto.getId());
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
-        user.setAddress(new AddressMapper().mapToEntity(userDto.getAddress()));
+        user.setAddress(addressMapper.mapToEntity(userDto.getAddress()));
         user.setPhone(userDto.getPhone());
         user.setWebsite(userDto.getWebsite());
-        user.setCompany(new CompanyMapper().mapToEntity(userDto.getCompany()));
+        user.setCompany(companyMapper.mapToEntity(userDto.getCompany()));
         return user;
     }
 }

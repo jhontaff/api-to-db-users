@@ -2,7 +2,9 @@ package com.users_api.mapper;
 
 import com.users_api.dto.GeolocationDto;
 import com.users_api.entity.Geolocation;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GeolocationMapper {
 
     public GeolocationDto mapToDto(Geolocation geolocation){

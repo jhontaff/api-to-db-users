@@ -1,6 +1,5 @@
 package com.users_api.config;
 
-import com.users_api.mapper.UserMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -13,8 +12,4 @@ public class AppConfig {
         return new RestTemplate();
     }
 
-    @Bean
-    public UserMapper userMapper() {
-        return new UserMapper();
-    }
 }

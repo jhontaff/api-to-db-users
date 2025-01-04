@@ -2,8 +2,17 @@ package com.users_api.mapper;
 
 import com.users_api.dto.AddressDto;
 import com.users_api.entity.Address;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddressMapper {
+
+    private final GeolocationMapper geolocationMapper;
+
+    public AddressMapper(GeolocationMapper geolocationMapper) {
+        this.geolocationMapper = geolocationMapper;
+    }
+
 
     public AddressDto mapToDto(Address address){
         if(address == null){
@@ -14,7 +23,7 @@ public class AddressMapper {
         addressDto.setSuite(address.getSuite());
         addressDto.setCity(address.getCity());
         addressDto.setZipcode(address.getZipcode());
-        addressDto.setGeo(new GeolocationMapper().mapToDto(address.getGeolocation()));
+        addressDto.setGeo(geolocationMapper.mapToDto(address.getGeolocation()));
         return addressDto;
 
     }
@@ -28,7 +37,7 @@ public class AddressMapper {
         address.setSuite(addressDto.getSuite());
         address.setCity(addressDto.getCity());
         address.setZipcode(addressDto.getZipcode());
-        address.setGeolocation(new GeolocationMapper().mapToEntity(addressDto.getGeo()));
+        address.setGeolocation(geolocationMapper.mapToEntity(addressDto.getGeo()));
         return address;
     }
 
